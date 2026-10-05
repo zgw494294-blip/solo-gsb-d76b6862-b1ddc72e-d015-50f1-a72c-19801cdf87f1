@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Python 逐行执行观察器</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header>
+    <h1>Python 逐行执行观察器</h1>
+    <div id="statusBar">
+      <span id="statusBadge" class="badge idle">空闲</span>
+      <span id="runInfo"></span>
+    </div>
+  </header>
+
+  <main>
+    <section id="left">
+      <div id="editorToolbar">
+        <span>源码（最多 {{ max_lines }} 行，运行期间只读）</span>
+        <span id="lineCount"></span>
+      </div>
+      <div id="examples">
+        示例：
+        <button type="button" data-example="assign">赋值</button>
+        <button type="button" data-example="func">函数调用</button>
+        <button type="button" data-example="loop">循环</button>
+        <button type="button" data-example="exc">异常</button>
+      </div>
+      <textarea id="editor" spellcheck="false" rows="22"
+                placeholder="在此输入 Python 代码（不支持 input() 与第三方包）"></textarea>
+      <div id="codeView" class="hidden"></div>
+      <div id="controls">
+        <button id="btnRun" type="button">▶ 运行</button>
+        <button id="btnStep" type="button" disabled>单步</button>
+        <button id="btnContinue" type="button" disabled>继续到结束</button>
+        <button id="btnTerminate" type="button" disabled>终止</button>
+      </div>
+      <div id="message"></div>
+    </section>
+
+    <section id="right">
+      <h2>当前局部变量</h2>
+      <table id="localsTable">
+        <thead><tr><th>名称</th><th>值</th></tr></thead>
+        <tbody><tr class="empty"><td colspan="2">（无）</td></tr></tbody>
+      </table>
+
+      <h2>标准输出</h2>
+      <pre id="stdout"></pre>
+
+      <h2>异常</h2>
+      <div id="exception">无</div>
+    </section>
+  </main>
+
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
